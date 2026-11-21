@@ -26,4 +26,3 @@ COPY package.json ./
 USER node
 EXPOSE 8080
 CMD ["sh", "-c", "exec node dist/index.js \"${MSGSTORE_DB:-/app/data/msgstore.db}\" \"${PORT:-8080}\""]
-HEALTHCHECK --interval=10s --timeout=3s --start-period=15s --retries=3 CMD ["sh", "-c", "case \"$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:${PORT}/health)\" in 2*|3*) exit 0;; *) exit 1;; esac"]
